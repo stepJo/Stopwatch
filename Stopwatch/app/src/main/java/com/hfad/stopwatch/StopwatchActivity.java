@@ -11,8 +11,9 @@ import java.util.Locale;
 public class StopwatchActivity extends Activity {
     private int seconds = 0;
     private boolean running;
-    private boolean wasRunning;
+    private boolean isRun;
 
+    //Build Instance
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,59 +21,62 @@ public class StopwatchActivity extends Activity {
         if (savedInstanceState != null) {
             seconds = savedInstanceState.getInt("seconds");
             running = savedInstanceState.getBoolean("running");
-            wasRunning = savedInstanceState.getBoolean("wasRunning");
+            isRun = savedInstanceState.getBoolean("isRun");
         }
-        runTimer();
+        setTimer();
     }
 
+    //Instance State
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putInt("seconds", seconds);
         savedInstanceState.putBoolean("running", running);
-        savedInstanceState.putBoolean("wasRunning", wasRunning);
+        savedInstanceState.putBoolean("isRun", isRun);
     }
 
+    //Resuming the stopwatch 
     @Override
     protected void onResume() {
         super.onResume();
-        if (wasRunning) {
+        if (isRun) {
             running = true;
         }
     }
 
+    //Pause the stopwatch
     @Override
     protected void onPause() {
         super.onPause();
-        wasRunning = running;
+        isRun = running;
         running = false;
     }
 
-    //Start the stopwatch running when the Start button is clicked.
+    //Start the stopwatch
     public void onClickStart(View view) {
         running = true;
     }
 
-    //Stop the stopwatch running when the Stop button is clicked.
+    //Stop the stopwatch
     public void onClickStop(View view) {
         running = false;
     }
 
-    //Reset the stopwatch when the Reset button is clicked.
+    //Reset the stopwatch
     public void onClickReset(View view) {
         running = false;
         seconds = 0;
     }
 
-    //Sets the number of seconds on the timer.
-    private void runTimer() {
+    //Seconds number of the timer
+    private void setTimer() {
         final TextView timeView = (TextView)findViewById(R.id.time_view);
         final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
-                int hours = seconds/3600;
-                int minutes = (seconds%3600)/60;
-                int secs = seconds%60;
+                int hours = seconds / 3600;
+                int minutes = (seconds % 600) / 60;
+                int secs = seconds % 60;
                 String time = String.format(Locale.getDefault(),
                         "%d:%02d:%02d", hours, minutes, secs);
                 timeView.setText(time);
