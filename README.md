@@ -1,1 +1,1 @@
-<h2<Java GSLC</h2>
+<h2>Java GSLC</h2>
