@@ -52,17 +52,17 @@ public class StopwatchActivity extends Activity {
     }
 
     //Start the stopwatch
-    public void onClickStart(View view) {
+    public void onStart(View view) {
         running = true;
     }
 
     //Stop the stopwatch
-    public void onClickStop(View view) {
+    public void onStop(View view) {
         running = false;
     }
 
     //Reset the stopwatch
-    public void onClickReset(View view) {
+    public void onReset(View view) {
         running = false;
         seconds = 0;
     }
