@@ -1,1 +1,1 @@
-## Mobile Programming GSLC
+## Mobile Programming GSLC - Stopwatch
